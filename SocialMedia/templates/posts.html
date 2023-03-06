@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+
+
+{% block content %}
+<style>
+    .make_font_black{
+        color: #212121;
+    }
+ </style>
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        {% for post in posts %}
+        <div class="col-lg-8">
+            <br>
+            <div class="card mb-4 make_font_black">
+                {% if post.image %}
+                <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}" width="600px" height="600px">
+                {% endif %}
+                {% if post.video %}
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video class="embed-responsive-item" src="{{ post.video.url }}" controls></video>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.text }}</p>
+                    <p class="card-text"><small class="text-muted">Posted by {{ post.author.username }} on {{ post.created_date|date:"F j, Y" }}</small></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Like ({{ post.likes }})</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Dislike ({{ post.dislikes }})</button>
+                            <a href="{% url 'post_detail' post.pk %}" class="btn btn-sm btn-outline-secondary">Comments</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
