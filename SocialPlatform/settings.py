@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-aca075^80zp*6jvzm0q@87pi2q%j7n=fz&uoq-kc@udad+j-(2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+LOGIN_URL = 'users:login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -41,7 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'SocialMedia'
+
+    #Custom apps
+
+    'SocialMedia',
+    'users',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -80,10 +87,15 @@ WSGI_APPLICATION = 'SocialPlatform.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'SocialMedia',
+        'USER': 'postgres',
+        'PASSWORD': '112233',
+        'HOST': '20.106.127.98',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
