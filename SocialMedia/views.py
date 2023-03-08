@@ -16,3 +16,8 @@ def post_detail(request, pk):
     comments = Comment.objects.filter(post=post)
     context = {'post': post, 'comments': comments}
     return render(request, 'post_detail.html', context)
+
+
+def CreatePost(request):
+
+    return render(request, 'MakeNewPost.html')

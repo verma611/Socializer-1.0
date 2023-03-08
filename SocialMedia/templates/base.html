@@ -39,8 +39,10 @@
              Hello, {{ user.username }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item smaller_font" href="{% url 'create_new_post' %}">Make A Post</a></li>
+            <li><a class="dropdown-item smaller_font" href="#">My Posts</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item make_red" href="{% url 'users:logout' %}">Log Out</a></li>
+            <li><a class="dropdown-item make_red smaller_font" href="{% url 'users:logout' %}">Log Out</a></li>
           </ul>
                     
           </li>
@@ -83,6 +85,9 @@
       }
       .make_text_white{
         color: white;
+      }
+      .smaller_font{
+        font-size: 15px;
       }
    </style>
 </html>

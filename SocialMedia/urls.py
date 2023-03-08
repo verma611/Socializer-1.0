@@ -7,5 +7,6 @@ from . import views
 urlpatterns = [
     path('',  views.HomePage, name="HomePage"),
     path('posts', views.ShowAllPosts, name="ShowAllPosts"),
-    path('post/<int:pk>/', views.post_detail, name='post_detail')
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('create_new_post/', views.CreatePost, name='create_new_post')
 ]
