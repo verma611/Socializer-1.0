@@ -31,7 +31,8 @@ LOGIN_URL = 'users:login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://verma611-crispy-enigma-7xj5x9g7xp2pr79-8000.preview.app.github.dev', 'localhost']
+CSRF_COOKIE_SECURE = True
 
 
 # Application definition
@@ -81,6 +82,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SocialPlatform.wsgi.application'
 
+
+
+CSRF_TRUSTED_ORIGINS = ['https://verma611-crispy-enigma-7xj5x9g7xp2pr79-8000.preview.app.github.dev']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
