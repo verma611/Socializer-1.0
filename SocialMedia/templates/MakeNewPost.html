@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+
+
+
 
 {% block content %}
-
-<P>Hello world</P>
-
+  <div class="container mt-4">
+    <h2>Create a new post</h2>
+    <form method="POST" enctype="multipart/form-data" class="form">
+      {% csrf_token %}
+      {% load bootstrap4 %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      {% endbuttons %}
+    </form>
+  </div>
 {% endblock %}
+
