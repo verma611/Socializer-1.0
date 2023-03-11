@@ -1,9 +1,11 @@
-from django.shortcuts import render
 from .models import Post, Comment
 from django.shortcuts import get_object_or_404
 from .forms import PostForm, CommentForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 
 
@@ -12,12 +14,18 @@ def HomePage(request):
 
 
 def ShowAllPosts(request):
-    posts = Post.objects.all()
-    context = {'posts': posts}
+    post_list = Post.objects.all()
+    paginator = Paginator(post_list, 8)  # Show 8 posts per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'page_obj': page_obj, 'posts': page_obj}
 
     return render(request, 'posts.html', context)
 
 
+@login_required
 def new_post(request):
     
     if request.method == 'POST':
@@ -32,6 +40,7 @@ def new_post(request):
         context = {'form': form}
         return render(request, 'MakeNewPost.html', context)
 
+@login_required
 def post_detail(request, pk):
     form = CommentForm()
     post = get_object_or_404(Post, pk=pk)
@@ -51,3 +60,25 @@ def post_detail(request, pk):
     comments = Comment.objects.filter(post=post)
     context = {'post': post, 'comments': comments, 'form': form}
     return render(request, 'post_detail.html', context)
+
+
+
+def like_post(request, pk):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, pk=pk)
+        post.likes += 1
+        post.save()
+        data = {
+            'likes': post.likes
+        }
+        return JsonResponse(data)
+
+def dislike_post(request, pk):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, pk=pk)
+        post.dislikes += 1
+        post.save()
+        data = {
+            'dislikes': post.dislikes
+        }
+        return JsonResponse(data)

@@ -88,10 +88,10 @@ WSGI_APPLICATION = 'SocialPlatform.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SocialMedia',
+        'NAME': 'postgres',#SocialMedia
         'USER': 'postgres',
         'PASSWORD': '112233',
-        'HOST': '20.106.127.98',
+        'HOST': 'localhost',#20.106.127.98
         'PORT': '5432',
     }
 }
