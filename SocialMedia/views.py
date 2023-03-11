@@ -26,7 +26,8 @@ def new_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('HomePage') 
+            messages.success(request, 'Your success message goes here.')
+            return redirect('ShowAllPosts') 
     else:
         form = PostForm()
         context = {'form': form}
